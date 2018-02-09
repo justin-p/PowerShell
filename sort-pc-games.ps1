@@ -40,9 +40,9 @@ $gernes = @('Point-and-click',
 'Arcade')
 
 # create a folder for each gerne
-ForEach ($gernetype in $gernes)
+ForEach ($genretype in $genres)
 {
-    mkdir -Path $sortedlocation\$gernetype
+    mkdir -Path $sortedlocation\$genretype
 }
 
 # get a list of local games.
@@ -59,8 +59,8 @@ ForEach ($game in $listofgamestosort)
 
     # use the result from above and select the first game and its first gerne
     # check which gerne this is
-    $gerne         = $request_game[0].genres[0]
-    $url           = $baseurl + "/genres/$gerne"
+    $genre         = $request_game[0].genres[0]
+    $url           = $baseurl + "/genres/$genre"
     $request_gerne = Invoke-RestMethod -Uri $url -Headers $headers
     
     # remove any slashes and move the game to the gerne folder.
