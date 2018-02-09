@@ -2,7 +2,7 @@
 # the gerne is currently checked using the igdb.com API.
 # using this i was able to sort 250ish games, about 20 games where sorted incorrectly, probally duo name mismatch. 
 # Todo/things to test
-#      - make a list of prefered genres instead of just using the first gerne listed from igdb.com
+#      - make a list of prefered genres instead of just using the first genre listed from igdb.com
 #      - incorperate something like https://github.com/gravejester/Communary.PASM to check game names instead of just using the first result listed from igdb.com
 #      - use SteamKit https://github.com/SteamRE/SteamKit instead of igdb
 
