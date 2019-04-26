@@ -10,7 +10,7 @@ $CompanyNames =@("Some Company Name","Another Company Name")
 
 $Domains =@()
 ForEach ($Company in $CompanyNames) {
-    # https://github.com/gfody/PsGoogle
+    # You need install/load this -> https://github.com/gfody/PsGoogle
     $domains += (Resolve-DnsName -Name $(([System.Uri](google -o -n 1 $ziek).url).Host -replace '^www\.') -Type TXT | Select-Object Name,Strings | Where-Object {$_.Strings -like 'v=spf1*'})
 }
 
