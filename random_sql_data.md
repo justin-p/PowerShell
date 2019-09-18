@@ -115,3 +115,67 @@ mysql> select * from student;
 ```
 
 
+```sql
+CREATE TABLE class(
+    name VARCHAR(30) NOT NULL,
+    class_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DESCRIBE class;
++----------+------------------+------+-----+---------+----------------+
+| Field    | Type             | Null | Key | Default | Extra          |
++----------+------------------+------+-----+---------+----------------+
+| name     | varchar(30)      | NO   |     | NULL    |                |
+| class_id | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
++----------+------------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+```
+
+
+```powershell
+Function RandomClassData {
+    param (
+        $Count = 5
+    ) 
+    $counter = 0
+    While ($counter -ne $count) {
+        $class = ig "[noun]"
+        $counter++
+        write-output ("INSERT INTO class VALUE ('$class', NULL);")
+    }
+}
+```
+
+```powershell
+RandomClassData -c 10
+
+INSERT INTO class VALUE ('Foot', NULL);
+INSERT INTO class VALUE ('Cross', NULL);
+INSERT INTO class VALUE ('Many', NULL);
+INSERT INTO class VALUE ('Start', NULL);
+INSERT INTO class VALUE ('Control', NULL);
+INSERT INTO class VALUE ('Exercise', NULL);
+INSERT INTO class VALUE ('Page', NULL);
+INSERT INTO class VALUE ('Structure', NULL);
+INSERT INTO class VALUE ('Dance', NULL);
+INSERT INTO class VALUE ('Feature', NULL);
+```
+
+```sql
++-----------+----------+
+| name      | class_id |
++-----------+----------+
+| Foot      |       10 |
+| Cross     |       11 |
+| Many      |       12 |
+| Start     |       13 |
+| Control   |       14 |
+| Exercise  |       15 |
+| Page      |       16 |
+| Structure |       17 |
+| Dance     |       18 |
+| Feature   |       19 |
++-----------+----------+
+10 rows in set (0.00 sec)
+```
