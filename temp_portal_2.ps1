@@ -94,7 +94,7 @@ function TypeText {
     Param(
         [string]$Text,
         [switch]$newline,
-        [int]$sleep = 80,
+        [int]$sleep,
         [int]$endsleep
     )
     ForEach ($letter in $text.toCharArray()) {
@@ -105,16 +105,25 @@ function TypeText {
     if ($endsleep){start-sleep -m $endsleep}
 }
 
-
 $Object1=@()
 $Object1+=TypeTextObject -Text "Forms FORM-29827281-12:" -newline -sleep 80
 $Object1+=TypeTextObject -Text "Test Assessment Report" -newline -sleep 80
 $Object1+=TypeTextObject -Text "" -newline
 $Object1+=TypeTextObject -Text "" -newline
-
 $Object2=@()
 $Object2+=TypeTextObject  -Text "" -endsleep 1500
-$Object2+=TypeTextObject  -Text "This was a triumph" -newline -sleep 50
+$Object2+=TypeTextObject  -Text "This was a triumph" -newline -sleep 50 -endsleep 2000
+$Object2+=TypeTextObject -Text "I'm making a note here:"  -newline -sleep 50 -endsleep 250
+$Object2+=TypeTextObject -Text "HUGE SUCCESS." -newline -sleep 50 -endsleep 1000
+$Object2+=TypeTextObject -Text "It's hard to " -sleep 80
+$Object2+=TypeTextObject -Text "overstate" -newline -sleep 150
+$Object2+=TypeTextObject -Text "my " -sleep 80
+$Object2+=TypeTextObject -Text "satisfaction." -newline -sleep 100 -endsleep 1800
+$Object2+=TypeTextObject -Text "Aperture Science" -newline -sleep 80 -endsleep 1100
+$Object2+=TypeTextObject -Text "We do what we must" -newline -sleep 70
+$Object2+=TypeTextObject -Text "because we can." -newline -sleep 80 -endsleep 1400
+$Object2+=TypeTextObject -Text "For the good of all of us." -newline -sleep 80
+$Object2+=TypeTextObject -Text "Except the ones who are dead." -newline -sleep 45 -endsleep 500
 
 ForEach ($Entry in $object1) {
     if ($entry.newline){
@@ -124,44 +133,26 @@ ForEach ($Entry in $object1) {
     }
 }
 Start-Process powershell -ArgumentList "-noexit -noprofile -windowstyle hidden -command & {$command}  $arg"
+
 ForEach ($Entry in $Object2) {
     if ($entry.newline){
         TypeText -Text $Entry.text -sleep $Entry.sleep -newline
     } Else {
         TypeText -Text $Entry.text -sleep $Entry.sleep
     }
+    if ($entry.endsleep) {
+        start-sleep -Milliseconds $entry.endsleep
+    }
 }
 
-
-
-start-sleep -Milliseconds 1500
-TypeText
-start-sleep -Milliseconds 2000
-TypeText -Text "I'm making a note here:"  -newline -sleep 50
-start-sleep -Milliseconds 250
-TypeText -Text "HUGE SUCCESS." -newline -sleep 50
-start-sleep -Milliseconds 1000
-TypeText -Text "It's hard to "
-TypeText -Text "overstate" -newline -sleep 150
-TypeText -Text "my "
-TypeText -Text "satisfaction." -newline -sleep 100
-start-sleep -Milliseconds 1800
-TypeText -Text "Aperture Science" -newline 
-start-sleep -Milliseconds 1100
-TypeText -Text "We do what we must" -newline -sleep 70
-TypeText -Text "because we can." -newline 
-start-sleep -Milliseconds 1400
-TypeText -Text "For the good of all of us." -newline
-TypeText -Text "Except the ones who are dead." -newline -sleep 45
-start-sleep -Milliseconds 500
-TypeText -Text "But there's no sense crying" -newline -sleep 110
-TypeText -Text "over every mistake." -newline -sleep 110
-TypeText -Text "You just keep on trying" -newline -sleep 110
-TypeText -Text "till you run out of cake." -newline -sleep 110
-TypeText -Text "And the Science gets done." -newline -sleep 110
-TypeText -Text "And you make a neat gun." -newline -sleep 110
-TypeText -Text "For the people who are" -newline -sleep 110
-TypeText -Text "still alive." -newline -sleep 110
-#start-sleep -Milliseconds 1500
-#TypeText -Text ""
+# TypeText -Text "But there's no sense crying" -newline -sleep 110
+# TypeText -Text "over every mistake." -newline -sleep 110
+# TypeText -Text "You just keep on trying" -newline -sleep 110
+# TypeText -Text "till you run out of cake." -newline -sleep 110
+# TypeText -Text "And the Science gets done." -newline -sleep 110
+# TypeText -Text "And you make a neat gun." -newline -sleep 110
+# TypeText -Text "For the people who are" -newline -sleep 110
+# TypeText -Text "still alive." -newline -sleep 110
+# start-sleep -Milliseconds 1500
+# TypeText -Text ""
 #
