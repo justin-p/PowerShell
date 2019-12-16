@@ -1,4 +1,7 @@
-# portal credits
+# Inspisred/based of 'http://www.leeholmes.com/projects/ps_html5/Invoke-PSHtml5.ps1'
+# I wanted to build something original for my Rubber Ducky. 
+# Decided to recreate the portal 1 end credits in powershell.
+
 clear
 function TypeTextObject {
     Param(
