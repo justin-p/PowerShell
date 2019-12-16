@@ -1,15 +1,5 @@
 # portal credits
-# Play-Notes -Notes "R5E,R0Q.,A5E,E6Q,F#6E,G6Q.,E6E,C#6Q,D6Q.,E6Q,A5E,A5Q,F#6Q.,R0H"
-# Play-Notes -Notes "R0H,G6E,F#6E,E6E,E6E,F#6H,R0H,R0Q,R0E,A5E,G6E,F#6E,E6E,E6Q,F#6E,D6Q.,E6E"
-# Play-Notes -Notes "A5H,R5E,R0Q.,E6Q,F#6E,G6Q.,E6E,C#6Q.,D6E,E6Q,A5E,D6E,E6E"
-# Play-Notes -Notes "F6E,E6E,D6E,C6E,R0Q,A5E,Bb5E,C6Q,F6Q,E6E,D6E,D6E,C6E,D6E,C6E,C6Q,C6Q,A5E,Bb5E"
-# Play-Notes -Notes "C6Q,F6Q,G6E,F6E,E6E,D6E,D6E,E6E,F6Q,F6Q,G6E,A6E,Bb6E,Bb6E,A6Q,G6Q,F6E,G6E"
-# Play-Notes -Notes "A6E,A6E,G6Q,F6Q,D6E,C6E,D6E,F6E,F6E,E6Q,E6E,F#6E,F#6Q."
-# Play-Notes -Notes "A6E,A6E,G6Q,F6Q,D6E,C6E,D6E,F6E,F6E,E6Q,E6E,F#6E,F#6H"
-# Play-Notes -Notes "G6E,A6E,A6Q,R0Q,R0E,G6E,F#6E,F#6Q"
-# Play-Notes -Notes "G6E,A6E,A6Q,R0Q,R0E,G6E,F#6E,F#6Q"
-# $arg = "-Notes 'R0H,G6E,F#6E,E6E,E6E,F#6H,R0H,R0Q,R0E,A5E,G6E,F#6E,E6E,E6E,F#6Q.,D6Q,E6E,A5H,R5E,R0Q.,A5E,E6Q,F#6E,G6Q.,E6E,C#6Q,D6Q.,E6Q,A5E,A5Q,F#6Q.,R0H,R0H,G6E,F#6E,E6E,E6E,F#6H,R0H,R0Q,R0E,A5E,G6E,F#6E,E6E,E6Q,F#6E,D6Q.,E6E,A5H,R5E,R0Q.,E6Q,F#6E,G6Q.,E6E,C#6Q.,D6E,E6Q,A5E,D6E,E6E,F6E,E6E,D6E,C6E,R0Q,A5E,Bb5E,C6Q,F6Q,E6E,D6E,D6E,C6E,D6E,C6E,C6Q,C6Q,A5E,Bb5E,C6Q,F6Q,G6E,F6E,E6E,D6E,D6E,E6E,F6Q,F6Q,G6E,A6E,Bb6E,Bb6E,A6Q,G6Q,F6E,G6E,A6E,A6E,G6Q,F6Q,D6E,C6E,D6E,F6E,F6E,E6Q,E6E,F#6E,F#6Q.,A6E,A6E,G6Q,F6Q,D6E,C6E,D6E,F6E,F6E,E6Q,E6E,F#6E,F#6H,G6E,A6E,A6Q,R0Q,R0E,G6E,F#6E,F#6Q,G6E,A6E,A6Q,R0Q,R0E,G6E,F#6E,F#6Q'"
-$arg = "-Notes 'R0H,G6E,F#6E,E6E,E6E,F#6H,R0H,R0Q,R0E,A5E,G6E,F#6E,E6E,E6E,F#6Q.,D6Q,E6E,A5H,R5E,R0Q.,A5E,E6Q,F#6E,G6Q.,E6E,C#6Q,D6Q.,E6Q,A5E,A5Q,F#6Q.,R0H,R0H,G6E,F#6E,E6E,E6E,F#6H,R0H,R0Q,R0E,A5E,G6E,F#6E,E6E,E6Q,F#6E,D6Q.,E6E,A5H,R5E,R0Q.,E6Q,F#6E,G6Q.,E6E,C#6Q.,D6E,E6Q,A5E,D6E,E6E,F6E,E6E,D6E,C6E,R0Q,A5E,Bb5E,C6Q,F6Q,E6E,D6E,D6E,C6E,D6E,C6E,C6Q,C6Q,A5E,Bb5E,C6Q,F6Q,G6E,F6E,E6E,D6E,D6E,E6E,F6Q,F6Q,G6E,A6E,Bb6E,Bb6E,A6Q,G6Q,F6E,G6E'"
+$arg = "-Notes 'R0H,G6E,F#6E,E6E,E6E,F#6H,R0H,R0Q,R0E,A5E,G6E,F#6E,E6E,E6E,F#6Q.,D6Q,E6E,A5H,R5E,R0Q.,A5E,E6Q,F#6E,G6Q.,E6E,C#6Q,D6Q.,E6Q,A5E,A5Q,F#6Q.,R0H,R0H,G6E,F#6E,E6E,E6E,F#6H,R0H,R0Q,R0E,A5E,G6E,F#6E,E6E,E6Q,F#6E,D6Q.,E6E,A5H,R5E,R0Q.,E6Q,F#6E,G6Q.,E6E,C#6Q.,D6E,E6Q,A5E,D6E,E6E,F6E,E6E,D6E,C6E,R0Q,A5E,Bb5E,C6Q,F6Q,E6E,D6E,D6E,C6E,D6E,C6E,C6Q,C6Q,A5E,Bb5E,C6Q,F6Q,G6E,F6E,E6E,D6E,D6E,E6E,F6Q,F6Q,G6E,A6E,Bb6E,Bb6E,A6Q,G6Q,F6E,G6E,A6E,A6E,G6Q,F6Q,D6E,C6E,D6E,F6E,F6E,E6Q,E6E,F#6E,F#6Q.'"
 $command = {    Param (
         [Parameter(Mandatory = $true)]
         [string]$Notes,
@@ -105,36 +95,46 @@ function TypeText {
     if ($endsleep){start-sleep -m $endsleep}
 }
 
-$Object1=@()
-$Object1+=TypeTextObject -Text "Forms FORM-29827281-12:" -newline -sleep 80
-$Object1+=TypeTextObject -Text "Test Assessment Report" -newline -sleep 80
-$Object1+=TypeTextObject -Text "" -newline
-$Object1+=TypeTextObject -Text "" -newline
-$Object2=@()
-$Object2+=TypeTextObject  -Text "" -endsleep 1500
-$Object2+=TypeTextObject  -Text "This was a triumph" -newline -sleep 50 -endsleep 2000
-$Object2+=TypeTextObject -Text "I'm making a note here:"  -newline -sleep 50 -endsleep 250
-$Object2+=TypeTextObject -Text "HUGE SUCCESS." -newline -sleep 50 -endsleep 1000
-$Object2+=TypeTextObject -Text "It's hard to " -sleep 80
-$Object2+=TypeTextObject -Text "overstate" -newline -sleep 150
-$Object2+=TypeTextObject -Text "my " -sleep 80
-$Object2+=TypeTextObject -Text "satisfaction." -newline -sleep 100 -endsleep 1800
-$Object2+=TypeTextObject -Text "Aperture Science" -newline -sleep 80 -endsleep 1100
-$Object2+=TypeTextObject -Text "We do what we must" -newline -sleep 70
-$Object2+=TypeTextObject -Text "because we can." -newline -sleep 80 -endsleep 1400
-$Object2+=TypeTextObject -Text "For the good of all of us." -newline -sleep 80
-$Object2+=TypeTextObject -Text "Except the ones who are dead." -newline -sleep 45 -endsleep 500
+$Intro=@()
+$Intro+=TypeTextObject -Text "Forms FORM-29827281-12:" -newline -sleep 80
+$Intro+=TypeTextObject -Text "Test Assessment Report" -newline -sleep 80
+$Intro+=TypeTextObject -Text "" -newline
+$Intro+=TypeTextObject -Text "" -newline
 
-ForEach ($Entry in $object1) {
+$Main=@()
+$Main+=TypeTextObject -Text "" -endsleep 1500
+$Main+=TypeTextObject -Text "This was a triumph" -newline -sleep 50 -endsleep 2000
+$Main+=TypeTextObject -Text "I'm making a note here:"  -newline -sleep 50 -endsleep 250
+$Main+=TypeTextObject -Text "HUGE SUCCESS." -newline -sleep 50 -endsleep 1000
+$Main+=TypeTextObject -Text "It's hard to " -sleep 80
+$Main+=TypeTextObject -Text "overstate" -newline -sleep 150
+$Main+=TypeTextObject -Text "my " -sleep 80
+$Main+=TypeTextObject -Text "satisfaction." -newline -sleep 100 -endsleep 1800
+$Main+=TypeTextObject -Text "Aperture Science" -newline -sleep 80 -endsleep 1100
+$Main+=TypeTextObject -Text "We do what we must" -newline -sleep 70
+$Main+=TypeTextObject -Text "because we can." -newline -sleep 80 -endsleep 1400
+$Main+=TypeTextObject -Text "For the good of all of us." -newline -sleep 70
+$Main+=TypeTextObject -Text "Except the ones who are dead." -newline -sleep 45 -endsleep 500
+$Main+=TypeTextObject -Text "But there's no sense crying" -newline -sleep 70
+$Main+=TypeTextObject -Text "over every mistake." -newline -sleep 70
+$Main+=TypeTextObject -Text "You just keep on trying" -newline -sleep 70
+$Main+=TypeTextObject -Text "till you run out of cake." -newline -sleep 50
+$Main+=TypeTextObject -Text "And the Science gets done." -newline -sleep 60
+$Main+=TypeTextObject -Text "And you make a neat gun." -newline -sleep 60
+$Main+=TypeTextObject -Text "For the people who are" -newline -sleep 60
+$Main+=TypeTextObject -Text "still alive." -newline -sleep 60
+
+ForEach ($Entry in $Intro) {
     if ($entry.newline){
         TypeText -Text $Entry.text -sleep $Entry.sleep -newline
     } Else {
         TypeText -Text $Entry.text -sleep $Entry.sleep
     }
 }
+
 Start-Process powershell -ArgumentList "-noexit -noprofile -windowstyle hidden -command & {$command}  $arg"
 
-ForEach ($Entry in $Object2) {
+ForEach ($Entry in $Main) {
     if ($entry.newline){
         TypeText -Text $Entry.text -sleep $Entry.sleep -newline
     } Else {
@@ -144,15 +144,3 @@ ForEach ($Entry in $Object2) {
         start-sleep -Milliseconds $entry.endsleep
     }
 }
-
-# TypeText -Text "But there's no sense crying" -newline -sleep 110
-# TypeText -Text "over every mistake." -newline -sleep 110
-# TypeText -Text "You just keep on trying" -newline -sleep 110
-# TypeText -Text "till you run out of cake." -newline -sleep 110
-# TypeText -Text "And the Science gets done." -newline -sleep 110
-# TypeText -Text "And you make a neat gun." -newline -sleep 110
-# TypeText -Text "For the people who are" -newline -sleep 110
-# TypeText -Text "still alive." -newline -sleep 110
-# start-sleep -Milliseconds 1500
-# TypeText -Text ""
-#
