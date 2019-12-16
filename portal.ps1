@@ -128,10 +128,8 @@ Finally
 {
     ## Clean up, display exit screen
     Clear-Host
-    $frames[-1] -split "`t"
     "`n"
-    "                        Happy Scripting from PowerShell..."
-    "                                 and Rick ASCII!"
+    "                        Happy Scripting from PowerShell"
     "`n`n`n"
     $player.Stop()
     $bgPowerShell.Dispose()
