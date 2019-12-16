@@ -1,147 +1,137 @@
 # portal credits
-clear
-$arg = "-Notes 'R0H,G6E,F#6E,E6E,E6E,F#6H,R0H,R0Q,R0E,A5E,G6E,F#6E,E6E,E6E,F#6Q.,D6Q,E6E,A5H,R5E,R0Q.,A5E,E6Q,F#6E,G6Q.,E6E,C#6Q,D6Q.,E6Q,A5E,A5Q,F#6Q.,R0H,R0H,G6E,F#6E,E6E,E6E,F#6H,R0H,R0Q,R0E,A5E,G6E,F#6E,E6E,E6Q,F#6E,D6Q.,E6E,A5H,R5E,R0Q.,E6Q,F#6E,G6Q.,E6E,C#6Q.,D6E,E6Q,A5E,D6E,E6E,F6E,E6E,D6E,C6E,R0Q,A5E,Bb5E,C6Q,F6Q,E6E,D6E,D6E,C6E,D6E,C6E,C6Q,C6Q,A5E,Bb5E,C6Q,F6Q,G6E,F6E,E6E,D6E,D6E,E6E,F6Q,F6Q,G6E,A6E,Bb6E,Bb6E,A6Q,G6Q,F6E,G6E,A6E,A6E,G6Q,F6Q,D6E,C6E,D6E,F6E,F6E,E6Q,E6E,F#6E,F#6Q.'"
-$command = {    Param (
-        [Parameter(Mandatory = $true)]
-        [string]$Notes,
-        [Parameter(Mandatory = $false)]
-        [int]$Tempo,
-        [Parameter(Mandatory = $false)]
-        [switch]$Output = $false
-    )
-
-    $NoteTypes = [pscustomobject]@{
-        # W = Whole, H = Half, Q = Quarter, E = Eighth, S = Sixteenth
-        'W'=1600;'W.'=2000;'H'=800;'H.'=1000;'Q'=400;'Q.'=600;'E'=200;'E.'=300;'S'=100;'S.'=150
-    }
-    $NoteIndex = [pscustomobject]@{
-        'C'  = @(16.35,32.7,65.41,130.8,261.6,523.3,1047,2093,4186)
-        'C#' = @(17.32,34.65,69.3,138.6,277.2,554.4,1109,2217,4435)
-        'D'  = @(18.35,36.71,73.42,146.8,293.7,587.3,1175,2349,4699)
-        'Eb' = @(19.45,38.89,77.78,155.6,311.1,622.3,1245,2489,4978)
-        'E'  = @(20.6,41.2,82.41,164.8,329.6,659.3,1319,2637,5274)
-        'F'  = @(21.83,43.65,87.31,174.6,349.2,698.5,1397,2794,5588)
-        'F#' = @(23.12,46.25,92.5,185,370,740,1480,2960,5920)
-        'G'  = @(24.5,49,98,196,392,784,1568,3136,6272)
-        'G#' = @(25.96,51.91,103.8,207.7,415.3,830.6,1661,3322,6645)
-        'A'  = @(27.5,55,110,220,440,880,1760,3520,7040)
-        'Bb' = @(29.14,58.27,116.5,233.1,466.2,932.3,1865,3729,7459)
-        'B'  = @(30.87,61.74,123.5,246.9,493.9,987.8,1976,3951,7902)
-        'R'  = '0'
-    }
-    foreach ($Note in ($Notes -split ',')){
-        $Note -match '(?<Pitch>[A-G][#|b]?|[R])(?<Octave>[0-8])?(?<NoteType>[Ww|Hh|Qq|Ee|Ss][\.]?)?' | Out-Null
-        $Pitch = $matches['Pitch']
-        if($matches['NoteType'] -eq $null){
-            if($Tempo){
-                [int]$Durration = 100/$Tempo*400
-            }else{
-                [int]$Durration = 400
-            }
-        }else{
-            if($Tempo){
-                [int]$Durration = 100/$Tempo*($NoteTypes.$($matches['NoteType']))
-            }else{
-                [int]$Durration = $NoteTypes.$($matches['NoteType'])
-            }
-        }
-        [int]$Frequency = switch ($matches['Octave']) {
-            0 {$NoteIndex.$Pitch} # Beep() does not support any frequencies lower than 38
-            1 {$NoteIndex.$Pitch | Where-Object {$_ -ge 32 -and $_ -le 62}} # using <38 for Rests
-            2 {$NoteIndex.$Pitch | Where-Object {$_ -ge 65 -and $_ -le 124}}
-            3 {$NoteIndex.$Pitch | Where-Object {$_ -ge 130 -and $_ -le 247}}
-            4 {$NoteIndex.$Pitch | Where-Object {$_ -ge 261 -and $_ -le 494}}
-            5 {$NoteIndex.$Pitch | Where-Object {$_ -ge 523 -and $_ -le 988}}
-            6 {$NoteIndex.$Pitch | Where-Object {$_ -ge 1047 -and $_ -le 1978}}
-            7 {$NoteIndex.$Pitch | Where-Object {$_ -ge 2093 -and $_ -le 3952}}
-            8 {$NoteIndex.$Pitch | Where-Object {$_ -ge 4186 -and $_ -le 7902}}
-            default {$NoteIndex.$Pitch | Where-Object {$_ -ge 523 -and $_ -le 988}}
-        }
-        if($Output){
-            ($Pitch+$matches['Octave']+$matches['NoteType']+' - '+"${Durration}"+' - '+"${Frequency}")
-        }
-        if($Pitch -eq 'R'){
-            Start-Sleep -Milliseconds $Durration
-        }
-        else{
-            [console]::beep($Frequency,$Durration)
-        }
-        $Note = $null
-        $Pitch = $null
-        $Durration = $null
-        $Frequency = $null
-    }
-    $Tempo = $null}
-function TypeTextObject {
+clearfunction TypeTextObject {
     Param(
         [string]$Text,
         [switch]$newline,
-        [int]$sleep = 80,
-        [int]$endsleep
+        [int]$TimeInMSToTypeText=0,
+        [int]$TimeInMSAfterText
     )
-    return $(New-Object psobject -ArgumentList @{text=$text;newline=$newline;sleep=$sleep;endsleep=$endsleep})
+    If (![string]::IsNullOrEmpty($Text)) {
+        $SleepBetweenChars = $($TimeInMSToTypeText / $Text.ToCharArray().count)
+    }
+    If ($TimeInMSToTypeText -eq 0){
+        $SleepBetweenChars=80
+    }
+    return $(New-Object psobject -ArgumentList @{text=$text;newline=$newline;SleepBetweenChars=$SleepBetweenChars;TimeInMSAfterText=$TimeInMSAfterText})
 }
 function TypeText {
     Param(
         [string]$Text,
         [switch]$newline,
-        [int]$sleep,
-        [int]$endsleep
+        [int]$SleepBetweenChars,
+        [int]$TimeInMSAfterText
     )
     ForEach ($letter in $text.toCharArray()) {
         write-host $letter -NoNewline
-        start-sleep -m $sleep
+        start-sleep -m $SleepBetweenChars
     }
     if ($newline) {write-host ""}
-    if ($endsleep){start-sleep -m $endsleep}
+    if ($TimeInMSAfterText){start-sleep -m $TimeInMSAfterText}
 }
 
-$Intro=@()
-$Intro+=TypeTextObject -Text "Forms FORM-29827281-12:" -newline -sleep 80
-$Intro+=TypeTextObject -Text "Test Assessment Report" -newline -sleep 80
-$Intro+=TypeTextObject -Text "" -newline
-$Intro+=TypeTextObject -Text "" -newline
+$StillAlive=@()
+$StillAlive+=TypeTextObject -Text "Forms FORM-29827281-12:" -newline
+$StillAlive+=TypeTextObject -Text "Test Assessment Report" -newline
+$StillAlive+=TypeTextObject -Text "" -newline 
+$StillAlive+=TypeTextObject -Text "" -TimeInMSAfterText 1800
+$StillAlive+=TypeTextObject -Text "This was a triumph" -newline -TimeInMSToTypeText 1500 -TimeInMSAfterText 1900
+$StillAlive+=TypeTextObject -Text "I'm making a note here:" -newline -TimeInMSToTypeText 1800 -TimeInMSAfterText 200
+$StillAlive+=TypeTextObject -Text "HUGE SUCCESS." -newline -TimeInMSToTypeText 1500 -TimeInMSAfterText 1300
+$StillAlive+=TypeTextObject -Text "It's hard to " -TimeInMSToTypeText 1400
+$StillAlive+=TypeTextObject -Text "overstate" -newline -TimeInMSToTypeText 1400
+$StillAlive+=TypeTextObject -Text "my " -TimeInMSToTypeText 600
+$StillAlive+=TypeTextObject -Text "satisfaction." -newline -TimeInMSToTypeText 1700 -TimeInMSAfterText 2200
+$StillAlive+=TypeTextObject -Text "Aperture Science" -newline -TimeInMSToTypeText 1500 -TimeInMSAfterText 2200
+$StillAlive+=TypeTextObject -Text "We do what we must" -newline -TimeInMSToTypeText 1600
+$StillAlive+=TypeTextObject -Text "because " -TimeInMSToTypeText 600 -TimeInMSAfterText 100
+$StillAlive+=TypeTextObject -Text "we " -TimeInMSToTypeText 400 -TimeInMSAfterText 100
+$StillAlive+=TypeTextObject -Text "can." -newline -TimeInMSToTypeText 400 -TimeInMSAfterText 1800
+$StillAlive+=TypeTextObject -Text "For the good of all of us." -newline -TimeInMSToTypeText 3000 -TimeInMSAfterText 200
+$StillAlive+=TypeTextObject -Text "Except the ones who are dead." -newline -TimeInMSToTypeText 1700 -TimeInMSAfterText 300
+$StillAlive+=TypeTextObject -Text "But there's no sense crying" -newline -TimeInMSToTypeText 1600
+$StillAlive+=TypeTextObject -Text "over every mistake." -newline -TimeInMSToTypeText 1800 -TimeInMSAfterText 100
+$StillAlive+=TypeTextObject -Text "You just keep on trying" -newline  -TimeInMSToTypeText 1800
+$StillAlive+=TypeTextObject -Text "till you run out of cake." -newline -TimeInMSToTypeText 1800 -TimeInMSAfterText 300
+$StillAlive+=TypeTextObject -Text "And the Science gets done." -newline -TimeInMSToTypeText 1600 -TimeInMSAfterText 100
+$StillAlive+=TypeTextObject -Text "And you make a neat gun." -newline -TimeInMSToTypeText 1800 -TimeInMSAfterText 100
+$StillAlive+=TypeTextObject -Text "For the people who are" -newline -TimeInMSToTypeText 1500 -TimeInMSAfterText 100
+$StillAlive+=TypeTextObject -Text "still alive." -newline -TimeInMSToTypeText 1500 -TimeInMSAfterText 3000
 
-$Main=@()
-$Main+=TypeTextObject -Text "" -endsleep 1500
-$Main+=TypeTextObject -Text "This was a triumph" -newline -sleep 50 -endsleep 2000
-$Main+=TypeTextObject -Text "I'm making a note here:"  -newline -sleep 50 -endsleep 250
-$Main+=TypeTextObject -Text "HUGE SUCCESS." -newline -sleep 50 -endsleep 1000
-$Main+=TypeTextObject -Text "It's hard to " -sleep 80
-$Main+=TypeTextObject -Text "overstate" -newline -sleep 150
-$Main+=TypeTextObject -Text "my " -sleep 80
-$Main+=TypeTextObject -Text "satisfaction." -newline -sleep 100 -endsleep 1800
-$Main+=TypeTextObject -Text "Aperture Science" -newline -sleep 80 -endsleep 1100
-$Main+=TypeTextObject -Text "We do what we must" -newline -sleep 70
-$Main+=TypeTextObject -Text "because we can." -newline -sleep 80 -endsleep 1400
-$Main+=TypeTextObject -Text "For the good of all of us." -newline -sleep 70
-$Main+=TypeTextObject -Text "Except the ones who are dead." -newline -sleep 45 -endsleep 500
-$Main+=TypeTextObject -Text "But there's no sense crying" -newline -sleep 70
-$Main+=TypeTextObject -Text "over every mistake." -newline -sleep 70
-$Main+=TypeTextObject -Text "You just keep on trying" -newline -sleep 70
-$Main+=TypeTextObject -Text "till you run out of cake." -newline -sleep 50
-$Main+=TypeTextObject -Text "And the Science gets done." -newline -sleep 60
-$Main+=TypeTextObject -Text "And you make a neat gun." -newline -sleep 60
-$Main+=TypeTextObject -Text "For the people who are" -newline -sleep 60
-$Main+=TypeTextObject -Text "still alive." -newline -sleep 60
+## Prepare the screen
+$host.UI.RawUI.BackgroundColor = "Black"
+$host.UI.RawUI.ForegroundColor = "Yellow"
+$Host.UI.RawUI.WindowTitle = "Still Alive"
+Clear-Host
 
-ForEach ($Entry in $Intro) {
-    if ($entry.newline){
-        TypeText -Text $Entry.text -sleep $Entry.sleep -newline
-    } Else {
-        TypeText -Text $Entry.text -sleep $Entry.sleep
-    }
+try {
+    $host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size 83,45
+}
+catch {
+    $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 83,45
+}
+try {
+    $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 83,45
+} catch {
+    $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 83,45
+}
+try {
+    $host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size 83,45
+} catch {
+    $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 83,45
+}
+try {
+    $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 83,45
+} catch {
+    $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 83,45
 }
 
-Start-Process powershell -ArgumentList "-noexit -noprofile -windowstyle hidden -command & {$command}  $arg"
+## Open the background song
+$script = @'
+   $player = New-Object -ComObject 'MediaPlayer.MediaPlayer'
+   $player.Open("https://github.com/justin-p/PowerShell/raw/master/StillAlive.wav")
+   $player
+'@
 
-ForEach ($Entry in $Main) {
-    if ($entry.newline){
-        TypeText -Text $Entry.text -sleep $Entry.sleep -newline
-    } Else {
-        TypeText -Text $Entry.text -sleep $Entry.sleep
+## ... in a background MTA-threaded PowerShell because
+## the MediaPlayer COM object doesn't like STA
+
+$runspace = [RunspaceFactory]::CreateRunspace()
+$runspace.ApartmentState = "MTA"
+$bgPowerShell = [PowerShell]::Create()
+$bgPowerShell.Runspace = $runspace
+$runspace.Open()
+$player = @($bgPowerShell.AddScript($script).Invoke())[0]
+
+Try
+{
+    ## Wait for it to buffer (or error out)
+    while($true) {
+        Start-Sleep -m 500
+        if($player.HasError -or ($player.ReadyState -eq 4)) { break }
     }
-    if ($entry.endsleep) {
-        start-sleep -Milliseconds $entry.endsleep
+    Start-Sleep -m 1600
+    Clear-Host
+    $host.UI.RawUI.CursorPosition = New-Object System.Management.Automation.Host.Coordinates 0,0
+    ForEach ($Entry in $StillAlive) {
+        if ($entry.newline){
+            TypeText -Text $Entry.text -SleepBetweenChars $Entry.SleepBetweenChars -newline
+        } Else {
+            TypeText -Text $Entry.text -SleepBetweenChars $Entry.SleepBetweenChars
+        }
+        if ($entry.TimeInMSAfterText) {
+            start-sleep -Milliseconds $entry.TimeInMSAfterText
+        }
     }
+}
+Finally
+{
+    ## Clean up, display exit screen
+    Clear-Host
+    $frames[-1] -split "`t"
+    "`n"
+    "                        Happy Scripting from PowerShell..."
+    "                                 and Rick ASCII!"
+    "`n`n`n"
+    $player.Stop()
+    $bgPowerShell.Dispose()
 }
