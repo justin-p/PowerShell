@@ -1,5 +1,6 @@
 # portal credits
-clearfunction TypeTextObject {
+clear
+function TypeTextObject {
     Param(
         [string]$Text,
         [switch]$newline,
