@@ -1,4 +1,4 @@
-﻿<#
+<#
     .NOTES
         Author: Justin Perdok (@JustinPerdok), https://justin-p.me.
         License: MIT
@@ -174,18 +174,10 @@ $player
       Clear-Host
       $host.UI.RawUI.CursorPosition = New-Object System.Management.Automation.Host.Coordinates 0, 0
       while ($true) {
-        write-host = $shrek1 -ForegroundColor Green 
-        Start-Sleep -Seconds 1
-        cls
-        write-host = $shrek2 -ForegroundColor Green   
-        Start-Sleep -Seconds 1
-        cls
-        write-host = $shrek3 -ForegroundColor Green      
-        Start-Sleep -Seconds 1
-        cls
-        write-host = $shrek2 -ForegroundColor Green   
-        Start-Sleep -Seconds 1
-        cls
+        Write-Output = $shrek1;Start-Sleep -Seconds 1;Clear-Host
+        Write-Output = $shrek2;Start-Sleep -Seconds 1;Clear-Host
+        Write-Output = $shrek3;Start-Sleep -Seconds 1;Clear-Host
+        Write-Output = $shrek2;Start-Sleep -Seconds 1;Clear-Host
       }
     } Catch {
 
@@ -195,7 +187,7 @@ $player
     ## Clean up, display exit screen
     Clear-Host
     "`n"
-    "                        Happy Scripting from PowerShell"
+    "          Happy Scripting from PowerShell"
     "`n`n`n"
     $player.Stop()
     $bgPowerShell.Dispose()
