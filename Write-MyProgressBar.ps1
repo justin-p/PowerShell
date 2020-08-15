@@ -255,7 +255,7 @@ function Write-MyProgressBar {
     }
     Process {    
         ForEach($Arg in $Argument.Keys) {
-            Write-Verbose $("Write-MyProgressBar - $Arg : $($Argument[$Arg])")
+            Write-Debug $("Write-MyProgressBar - $Arg : $($Argument[$Arg])")
         }
     } 
     End {
