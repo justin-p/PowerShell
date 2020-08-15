@@ -1,5 +1,13 @@
 Function Get-UserAgent {
-    # Based off https://gist.github.com/rossnz/5609904
+<#
+    .NOTES
+        Author: Justin Perdok (@JustinPerdok), https://justin-p.me.
+        License: MIT
+        Based off https://gist.github.com/rossnz/5609904
+
+    .LINK
+        https://github.com/justin-p/PowerShell/blob/master/Get-UserAgen.ps1
+#>    
     Param (
         [ValidateSet('Firefox', 'Chrome', 'InternetExplorer', 'Opera', 'Safari')]
         [string]$BrowserType

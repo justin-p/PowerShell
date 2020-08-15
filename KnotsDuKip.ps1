@@ -1,4 +1,12 @@
 function Bakpao {
+<#
+    .NOTES
+        Author: Justin Perdok (@JustinPerdok), https://justin-p.me.
+        License: MIT
+
+    .LINK
+        https://github.com/justin-p/PowerShell/blob/master/KnotsDuKip.ps1
+#>
     $Maaskantje = @"
 using System;
 using System.Runtime.InteropServices;
@@ -20,6 +28,14 @@ return $Maaskantje
 }
 
 function ZOneGroteVuurbal {
+<#
+    .NOTES
+        Author: Justin Perdok (@JustinPerdok), https://justin-p.me.
+        License: MIT
+
+    .LINK
+        https://github.com/justin-p/PowerShell/blob/master/KnotsDuKip.ps1
+#>    
     Param (
         $BAM
     )
@@ -33,11 +49,26 @@ function ZOneGroteVuurbal {
 }
 
 function GratisBier ($Schultenbrau) {
+<#
+    .NOTES
+        Author: Justin Perdok (@JustinPerdok), https://justin-p.me.
+        License: MIT
+
+    .LINK
+        https://github.com/justin-p/PowerShell/blob/master/KnotsDuKip.ps1
+#>    
     [void](ZOneGroteVuurbal -BAM $(Bakpao))
     return (iwr $Schultenbrau).content
 }
-function Maak-MeNu
-{
+function Maak-MeNu {
+<#
+    .NOTES
+        Author: Justin Perdok (@JustinPerdok), https://justin-p.me.
+        License: MIT
+
+    .LINK
+        https://github.com/justin-p/PowerShell/blob/master/KnotsDuKip.ps1
+#>
     param (
         [string]$Title = 'My Menu'
     )

@@ -25,12 +25,10 @@ Function Edit-FirewallGPOTemplate
     .EXAMPLE
             Edit-FirewallGPOTemplate -RegPol "$GPOPath\$GPOID\DomainSysvol\GPO\Machine\registry.pol" -KeyPath "SOFTWARE\Policies\Microsoft\WindowsFirewall\FirewallRules" -FindValue "RA4=ReplaceWithIPs" -ReplaceValue "RA4=$IPs"
     .NOTES
-        v1.00 5-12-2018
-        Justin Perdok
-
-        v1.01 19-12-2018
-        'Properly' check input for ReplaceValue.
-        Should really be done a more sophisticated way so you can't screwup a GPO and bork the firewall. -Justin Perdok
+        Author: Justin Perdok (@JustinPerdok), https://justin-p.me.
+        License: MIT
+    .LINK
+        https://github.com/justin-p/PowerShell/blob/master/firewallgpo_edit/edit_templates.ps1
     #>
     #Requires -version 5
     #Requires -Modules PolicyFileEditor

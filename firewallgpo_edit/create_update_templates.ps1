@@ -1,3 +1,12 @@
+<#
+    .NOTES
+        Author: Justin Perdok (@JustinPerdok), https://justin-p.me.
+        License: MIT
+
+    .LINK
+        https://github.com/justin-p/PowerShell/blob/master/firewallgpo_edit/create_update_templates.ps1
+#>
+
 Import-Module -Name PolicyFileEditor
 $GPOToUpdate = 'C:\_offline\temp\Example\registry.pol'
 Get-PolicyFileEntry $GPOToUpdate -All
@@ -22,7 +31,7 @@ RemoteDesktop-UserMode-In-TCP SOFTWARE\Policies\Microsoft\WindowsFirewall\Firewa
 
 $RegPath = "SOFTWARE\Policies\Microsoft\WindowsFirewall\FirewallRules"
 $RegName = 'RemoteDesktop-In-TCP'
-$Rule    = (Get-PolicyFileEntry -Path $GPOToUpdate -Key $RegPath -ValueName $RegName)
+$Rule = (Get-PolicyFileEntry -Path $GPOToUpdate -Key $RegPath -ValueName $RegName)
 <#
 PS C:\> $rule
 ValueName            Key                                                       Data                                                                                                                                                                                                  Type
@@ -45,7 +54,7 @@ Desc=@FirewallAPI.dll,-28756
 EmbedCtxt=@FirewallAPI.dll,-2875
 #>
 
-$RuleSplit = $RuleSplit.replace('RA4=192.168.1.1','RA4=ReplaceWithIPs')
+$RuleSplit = $RuleSplit.replace('RA4=192.168.1.1', 'RA4=ReplaceWithIPs')
 <#
 v2.26
 Action=Allow

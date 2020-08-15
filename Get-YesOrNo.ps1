@@ -1,4 +1,12 @@
 Function Get-YesOrNo {
+<#
+    .NOTES
+        Author: Justin Perdok (@JustinPerdok), https://justin-p.me.
+        License: MIT
+
+    .LINK
+        https://github.com/justin-p/PowerShell/blob/master/Get-YesOrNo.ps1
+#>    
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory)]

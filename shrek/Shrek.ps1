@@ -1,17 +1,14 @@
-﻿function Get-ScriptDirectory
-{
-$Invocation = (Get-Variable MyInvocation -Scope 1).Value
-Split-Path $Invocation.MyCommand.Path
-}
-$Path = Get-ScriptDirectory
+﻿<#
+    .NOTES
+        Author: Justin Perdok (@JustinPerdok), https://justin-p.me.
+        License: MIT
 
-function Shrek
-{
-$cursorTop = [Console]::CursorTop   
-try 
-{
-    [Console]::CursorVisible = $false
-    $shrek1 = @"
+    .LINK
+        https://github.com/justin-p/PowerShell/blob/master/shrek/Shrek.ps1
+#>   
+$shrek1 = @"
+
+                    _____
                  ,-'     `._                        
                ,'           `.        ,-.           
              ,'               \       ),.\          
@@ -45,7 +42,9 @@ try
 
 
 "@ 
-    $shrek2 = @"
+$shrek2 = @"
+
+                    _____
                  ,-'     `._                          
                ,'           `.        ,-.             
              ,'               \       ),.\            
@@ -79,7 +78,9 @@ try
 
                                                             
 "@                                                          
-    $shrek3 = @"                                            
+$shrek3 = @"
+
+                    _____
                  ,-'     `._                                
                ,'           `.        ,-.                   
              ,'               \       ),.\                  
@@ -109,27 +110,70 @@ try
 
 ┌─┐┬ ┬┬─┐┌─┐┬┌─  ┬┌─┐  ┬ ┬┌─┐┌┬┐┌─┐┬ ┬┬┌┐┌┌─┐  ┬ ┬┌─┐┬ ┬ 
 └─┐├─┤├┬┘├┤ ├┴┐  │└─┐  │││├─┤ │ │  ├─┤│││││ ┬  └┬┘│ ││ │ 
-└─┘┴ ┴┴└─└─┘┴ ┴  ┴└─┘  └┴┘┴ ┴ ┴ └─┘┴ ┴┴┘└┘└─┘   ┴ └─┘└─┘o
+└─┘┴ ┴┴└─└─┘┴ ┴  ┴└─┘  └┴┘┴ ┴ ┴ └─┘┴ ┴┴┘└┘└─┘   ┴ └─┘└─┘o 
 
-                                                            
-"@                                                          
-    $StartShrek = start-job {
-        Add-Type -AssemblyName presentationCore
-        $filepath = [uri] "D:\Documents\git\PowerShell\5cHzAAnJbZIk.128.mp3"
-        $wmplayer = New-Object System.Windows.Media.MediaPlayer
-        $wmplayer.Open($filepath)
-        Start-Sleep 2 # This allows the $wmplayer time to load the audio file
-        $duration = $wmplayer.NaturalDuration.TimeSpan.TotalSeconds
-        $wmplayer.Play()
-        Start-Sleep $duration
-        $wmplayer.Stop()
-        $wmplayer.Close()
+
+"@
+
+function Play-Shrek {
+  try {
+    ## Prepare the screen
+    $host.UI.RawUI.BackgroundColor = "Black"
+    $host.UI.RawUI.ForegroundColor = "DarkGreen"
+    $Host.UI.RawUI.WindowTitle = "GET OUT OF MY SWAMP"
+    Clear-Host
+
+    try {
+      $host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size 60, 40
     }
-    cls
-    start-sleep -s 5
-    while($StartShrek.JobStateInfo.State -eq "Running")
-    {
-        cls
+    catch {
+      $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 60, 40
+    }
+    try {
+      $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 60, 40
+    }
+    catch {
+      $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 60, 40
+    }
+    try {
+      $host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size 60, 40
+    }
+    catch {
+      $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 60, 40
+    }
+    try {
+      $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 60, 40
+    }
+    catch {
+      $host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size 83, 45
+    }
+
+    ## Open the background song
+    $script = @'
+$player = New-Object -ComObject 'MediaPlayer.MediaPlayer'
+$player.Open("https://github.com/justin-p/PowerShell/raw/master/shrek/5cHzAAnJbZIk.128.mp3")
+$player
+'@
+
+    ## ... in a background MTA-threaded PowerShell because
+    ## the MediaPlayer COM object doesn't like STA
+
+    $runspace = [RunspaceFactory]::CreateRunspace()
+    $runspace.ApartmentState = "MTA"
+    $bgPowerShell = [PowerShell]::Create()
+    $bgPowerShell.Runspace = $runspace
+    $runspace.Open()
+    $player = @($bgPowerShell.AddScript($script).Invoke())[0]
+    Try {
+      ## Wait for it to buffer (or error out)
+      while ($true) {
+        Start-Sleep -m 500
+        if ($player.HasError -or ($player.ReadyState -eq 4)) { break }
+      }
+      Start-Sleep -m 1600
+      Clear-Host
+      $host.UI.RawUI.CursorPosition = New-Object System.Management.Automation.Host.Coordinates 0, 0
+      while ($true) {
         write-host = $shrek1 -ForegroundColor Green 
         Start-Sleep -Seconds 1
         cls
@@ -141,15 +185,20 @@ try
         cls
         write-host = $shrek2 -ForegroundColor Green   
         Start-Sleep -Seconds 1
+        cls
+      }
+    } Catch {
+
     }
-    # Only needed if you use a multiline frames
-    Write-Host ($frames[0] -replace '[^\s+]', ' ')
+  }
+  Finally {
+    ## Clean up, display exit screen
+    Clear-Host
+    "`n"
+    "                        Happy Scripting from PowerShell"
+    "`n`n`n"
+    $player.Stop()
+    $bgPowerShell.Dispose()
+  }
 }
-finally 
-{
-    [Console]::SetCursorPosition(0, $cursorTop)
-    [Console]::CursorVisible = $true
-    shrek
-}
-}
-Shrek
+Play-Shrek
