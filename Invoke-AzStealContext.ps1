@@ -53,9 +53,9 @@ Function Invoke-AzStealContext {
                 $selection = Read-Host "Select the context to use as default."
             } until ($Contexts[$selection-1])
             $DefaultContext = $Contexts[$selection-1]
+            $AzureRmContext.DefaultContextKey = $DefaultContext
         }
         ForEach ($context in $AzureRmContext.contexts.PSObject.Properties.Name) {
-            $AzureRmContext.DefaultContextKey = $DefaultContext
             $AzureRmContext.Contexts.$($context).TokenCache.CacheData = $b64
         }
         $AzureRmContext | ConvertTo-Json -Depth 100 | Set-Content $(Join-Path $Path $OutFile)
